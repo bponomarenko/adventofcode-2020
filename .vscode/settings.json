@@ -1,0 +1,10 @@
+{
+   "[rust]": {
+      "editor.defaultFormatter": "rust-lang.rust",
+      "editor.insertSpaces": true,
+      "editor.tabSize": 4,
+   },
+   "editor.detectIndentation": false,
+  "workbench.tree.indent": 16,
+  "rust-analyzer.cargo.allFeatures": true,
+}
