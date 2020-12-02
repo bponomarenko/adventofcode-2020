@@ -8,10 +8,7 @@ pub fn run(input: &String) {
 
             let min_max: Vec<u8> = partials[0]
                 .split('-')
-                .map(|s| {
-                    s.parse::<u8>()
-                        .expect("Min-max limit should be defined with numbers")
-                })
+                .map(|s| s.parse::<u8>().expect("Min-max limit should be defined with numbers"))
                 .collect();
 
             matches_count >= min_max[0] && matches_count <= min_max[1]
