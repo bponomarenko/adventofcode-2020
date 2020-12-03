@@ -39,16 +39,17 @@ fn find_trees(dx: u16, dy: u16, lines: &Vec<&str>) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::find_trees;
 
     const INPUT: &str = "..##.......\n#...#...#..\n.#....#..#.\n..#.#...#.#\n.#...##..#.\n..#.##.....\n.#.#.#....#\n.#........#\n#.##...#...\n#...##....#\n.#..#...#.#";
 
     #[test]
     fn should_find_all_trees() {
-        assert_eq!(find_trees(1, 1, &INPUT.split_terminator('\n').collect()), 2);
-        assert_eq!(find_trees(3, 1, &INPUT.split_terminator('\n').collect()), 7);
-        assert_eq!(find_trees(5, 1, &INPUT.split_terminator('\n').collect()), 3);
-        assert_eq!(find_trees(7, 1, &INPUT.split_terminator('\n').collect()), 4);
-        assert_eq!(find_trees(1, 2, &INPUT.split_terminator('\n').collect()), 2);
+        let lines = &INPUT.split_terminator('\n').collect();
+        assert_eq!(find_trees(1, 1, lines), 2);
+        assert_eq!(find_trees(3, 1, lines), 7);
+        assert_eq!(find_trees(5, 1, lines), 3);
+        assert_eq!(find_trees(7, 1, lines), 4);
+        assert_eq!(find_trees(1, 2, lines), 2);
     }
 }

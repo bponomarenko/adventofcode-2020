@@ -32,7 +32,7 @@ fn find_trees(dx: u16, dy: u16, lines: &Vec<&str>) -> usize {
 
 #[cfg(test)]
 mod tests {
-    use super::*;
+    use super::find_trees;
 
     const INPUT: &str = "..##.......\n#...#...#..\n.#....#..#.\n..#.#...#.#\n.#...##..#.\n..#.##.....\n.#.#.#....#\n.#........#\n#.##...#...\n#...##....#\n.#..#...#.#";
 
