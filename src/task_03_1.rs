@@ -11,12 +11,7 @@ fn find_trees(dx: u16, dy: u16, lines: &Vec<&str>) -> usize {
     let mut y = dy;
 
     loop {
-        if lines[y as usize]
-            .chars()
-            .nth(if x >= line_len { x % line_len } else { x } as usize)
-            .unwrap()
-            .eq(&'#')
-        {
+        if lines[y as usize].chars().nth((x % line_len) as usize).unwrap().eq(&'#') {
             count += 1;
         }
 
