@@ -1,5 +1,5 @@
 [package]
-name = "advent-of-code-2020-rust"
+name = "aoc-2020"
 version = "0.1.0"
 authors = ["Borys Ponomarenko <bponomarenko@gmail.com>"]
 edition = "2018"
@@ -8,3 +8,4 @@ edition = "2018"
 
 [dependencies]
 regex = "1.4.2"
+lazy_static = "1.4.0"
