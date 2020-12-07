@@ -1,19 +1,25 @@
-pub fn run(input: String) -> u32 {
-    let entries: Vec<u32> = input
-        .split_whitespace()
-        .map(|s| s.parse().expect("Input should consist of numbers"))
-        .collect();
+use itertools::Itertools;
 
-    find_matching_entries(&entries)
+pub fn run(input: String) -> u32 {
+    let matching_combo = input
+        .split_whitespace()
+        .map(|s| s.parse::<u32>().expect("Input should consist of numbers"))
+        .combinations(2)
+        .find(|combo: &Vec<u32>| combo.iter().sum::<u32>() == 2020);
+
+    match matching_combo {
+        None => 0,
+        Some(combo) => combo.iter().product::<u32>(),
+    }
 }
 
-fn find_matching_entries(entries: &Vec<u32>) -> u32 {
-    for (i, entry) in entries.iter().enumerate() {
-        for sub_entry in entries[(i + 1)..entries.len()].iter() {
-            if entry + sub_entry == 2020 {
-                return entry * sub_entry;
-            }
-        }
+#[cfg(test)]
+mod tests {
+    use super::run;
+
+    #[test]
+    fn should_run_correctly() {
+        let input = String::from("1721 979 366 299 675 1456");
+        assert_eq!(run(input), 514579);
     }
-    return 0;
 }
