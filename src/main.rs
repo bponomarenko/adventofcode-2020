@@ -2,11 +2,11 @@ use std::env;
 use std::fs;
 use std::path::Path;
 
-#[path = "task_05_2.rs"]
+#[path = "task_07_2.rs"]
 mod task;
 
 fn main() {
-    task::run(&read_input());
+    task::run(read_input());
 }
 
 fn read_input() -> String {
