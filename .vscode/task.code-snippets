@@ -19,12 +19,17 @@
     "scope": "rust",
     "prefix": "task",
     "body": [
-      "pub fn run(input: String) {",
-      "\tprintln!(\"Result: {}\", input);$1",
+      "pub fn run(input: String) -> usize {",
+      "\t1usize$1",
       "}\n",
       "#[cfg(test)]",
       "mod tests {",
-      "\tuse super::*;",
+      "\tuse super::run;\n",
+      "\t#[test]",
+      "\tfn should_run_correctly() {",
+      "\t\tlet input = String::from(\"any\");",
+      "\t\tassert_eq!(run(input), 1);",
+      "\t}",
       "}"
     ]
   }

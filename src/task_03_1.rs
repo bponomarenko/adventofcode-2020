@@ -1,6 +1,6 @@
-pub fn run(input: String) {
+pub fn run(input: String) -> usize {
     let lines: Vec<&str> = input.split_terminator('\n').collect();
-    println!("Result: {}", find_trees(3, 1, &lines));
+    find_trees(3, 1, &lines)
 }
 
 fn find_trees(dx: u16, dy: u16, lines: &Vec<&str>) -> usize {

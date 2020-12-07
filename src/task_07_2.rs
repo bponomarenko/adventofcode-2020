@@ -7,11 +7,7 @@ lazy_static! {
     static ref BAGS_RE: Regex = Regex::new(r"^(?P<count>\d+) (?P<name>.+) bags?$").unwrap();
 }
 
-pub fn run(input: String) {
-    println!("Result: {}", count_bag_colors(input));
-}
-
-fn count_bag_colors(input: String) -> u32 {
+pub fn run(input: String) -> u32 {
     let bag_content_map = get_bags_map(&input);
     count_bags_recursive(
         &bag_content_map,
@@ -66,7 +62,7 @@ fn get_bags_map(input: &String) -> HashMap<&str, Vec<Bag>> {
 
 #[cfg(test)]
 mod tests {
-    use super::count_bag_colors;
+    use super::run;
 
     #[test]
     fn should_correctly_count_bag_colors() {
@@ -81,7 +77,7 @@ mod tests {
             faded blue bags contain no other bags.
             dotted black bags contain no other bags.",
         );
-        assert_eq!(count_bag_colors(input), 32);
+        assert_eq!(run(input), 32);
     }
 
     #[test]
@@ -95,6 +91,6 @@ mod tests {
             dark blue bags contain 2 dark violet bags.
             dark violet bags contain no other bags.",
         );
-        assert_eq!(count_bag_colors(input), 126);
+        assert_eq!(run(input), 126);
     }
 }

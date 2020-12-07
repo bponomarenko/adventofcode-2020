@@ -11,29 +11,7 @@ lazy_static! {
     static ref PID_RE: Regex = Regex::new(r"^\d{9}$").unwrap();
 }
 
-pub fn run(input: String) {
-    println!("Valid passports: {}", count_valid_passports(input));
-}
-
-fn is_passport_valid(passport_fields: &Vec<&str>) -> bool {
-    passport_fields.len() == 8 || (passport_fields.len() == 7 && !passport_fields.contains(&"cid"))
-}
-
-fn is_field_valid(name: &str, value: &str) -> bool {
-    match name {
-        "byr" => BYR_RE.is_match(value),
-        "iyr" => IYR_RE.is_match(value),
-        "eyr" => EYR_RE.is_match(value),
-        "hgt" => HGT_RE.is_match(value),
-        "hcl" => HCL_RE.is_match(value),
-        "ecl" => ECL_RE.is_match(value),
-        "pid" => PID_RE.is_match(value),
-        "cid" => true,
-        _ => false,
-    }
-}
-
-fn count_valid_passports(input: &String) -> u32 {
+pub fn run(input: String) -> u32 {
     let mut valid_passports = 0;
     let mut passport_fields: Vec<&str> = Vec::new();
 
@@ -59,17 +37,35 @@ fn count_valid_passports(input: &String) -> u32 {
     if is_passport_valid(&passport_fields) {
         valid_passports += 1;
     }
-    return valid_passports;
+    valid_passports
+}
+
+fn is_passport_valid(passport_fields: &Vec<&str>) -> bool {
+    passport_fields.len() == 8 || (passport_fields.len() == 7 && !passport_fields.contains(&"cid"))
+}
+
+fn is_field_valid(name: &str, value: &str) -> bool {
+    match name {
+        "byr" => BYR_RE.is_match(value),
+        "iyr" => IYR_RE.is_match(value),
+        "eyr" => EYR_RE.is_match(value),
+        "hgt" => HGT_RE.is_match(value),
+        "hcl" => HCL_RE.is_match(value),
+        "ecl" => ECL_RE.is_match(value),
+        "pid" => PID_RE.is_match(value),
+        "cid" => true,
+        _ => false,
+    }
 }
 
 #[cfg(test)]
 mod tests {
-    use super::count_valid_passports;
+    use super::run;
 
     #[test]
     fn should_properly_count_valid_passports() {
         assert_eq!(
-            count_valid_passports(&String::from(
+            run(&String::from(
                 "
                 ecl:gry pid:860033327 eyr:2020 hcl:#fffffd
                 byr:1937 iyr:2017 cid:147 hgt:183cm
@@ -90,7 +86,7 @@ mod tests {
         );
 
         assert_eq!(
-            count_valid_passports(&String::from(
+            run(&String::from(
                 "
                 pid:087499704 hgt:74in ecl:grn iyr:2012 eyr:2030 byr:1980
                 hcl:#623a2f
@@ -113,7 +109,7 @@ mod tests {
     #[test]
     fn should_properly_count_invalid_passports() {
         assert_eq!(
-            count_valid_passports(&String::from(
+            run(&String::from(
                 "
                 eyr:1972 cid:100
                 hcl:#18171d ecl:amb hgt:170 pid:186cm iyr:2018 byr:1926

@@ -1,4 +1,4 @@
-pub fn run(input: String) {
+pub fn run(input: String) -> usize {
     let lines: Vec<&str> = input.split_terminator('\n').collect();
     let routes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
     let mut res = 1;
@@ -6,8 +6,7 @@ pub fn run(input: String) {
     for route in routes.iter() {
         res *= find_trees(route.0, route.1, &lines);
     }
-
-    println!("Result: {}", res);
+    res
 }
 
 fn find_trees(dx: u16, dy: u16, lines: &Vec<&str>) -> usize {

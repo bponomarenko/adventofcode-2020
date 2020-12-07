@@ -1,4 +1,4 @@
-pub fn run(input: String) {
+pub fn run(input: String) -> u32 {
     let mut ids_iter: Vec<u32> = input.split_whitespace().map(|s| parse_id(s)).collect();
     ids_iter.sort();
 
@@ -9,7 +9,7 @@ pub fn run(input: String) {
             break;
         }
     }
-    println!("Result: {}", my_id);
+    my_id
 }
 
 fn parse_id(line: &str) -> u32 {

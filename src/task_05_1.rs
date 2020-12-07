@@ -1,5 +1,5 @@
-pub fn run(input: String) {
-    println!("Result: {}", input.split_whitespace().map(|s| parse_id(s)).max().unwrap());
+pub fn run(input: String) -> u32 {
+    input.split_whitespace().map(|s| parse_id(s)).max().unwrap()
 }
 
 fn parse_id(line: &str) -> u32 {

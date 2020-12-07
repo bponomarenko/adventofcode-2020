@@ -1,9 +1,9 @@
 use regex::Regex;
 
-pub fn run(input: String) {
+pub fn run(input: String) -> usize {
     let re = Regex::new(r"^(\d+)-(\d+)\s(.):\s(\w+)").unwrap();
 
-    let count = input
+    input
         .split_terminator('\n')
         // Filter only strings with passwords, which satisfy requirements
         .filter(|s| {
@@ -18,7 +18,5 @@ pub fn run(input: String) {
             let matches_count = password.matches(&char).count() as u8;
             matches_count >= min && matches_count <= max
         })
-        .count();
-
-    println!("Result: {}", count);
+        .count()
 }

@@ -7,11 +7,7 @@ lazy_static! {
     static ref BAGS_RE: Regex = Regex::new(r"^\d+ (.+) bags?$").unwrap();
 }
 
-pub fn run(input: String) {
-    println!("Result: {}", count_bag_colors(input));
-}
-
-fn count_bag_colors(input: String) -> usize {
+pub fn run(input: String) -> usize {
     let parent_bags_map = get_bags_map(&input);
     let mut unique_bags = HashSet::new();
     let mut queue = vec!["shiny gold"];
@@ -49,7 +45,7 @@ fn get_bags_map(input: &String) -> HashMap<&str, Vec<&str>> {
 
 #[cfg(test)]
 mod tests {
-    use super::count_bag_colors;
+    use super::run;
 
     #[test]
     fn should_correctly_count_bag_colors() {
@@ -64,6 +60,6 @@ mod tests {
             faded blue bags contain no other bags.
             dotted black bags contain no other bags.",
         );
-        assert_eq!(count_bag_colors(input), 4);
+        assert_eq!(run(input), 4);
     }
 }

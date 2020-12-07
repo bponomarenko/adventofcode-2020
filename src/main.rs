@@ -6,7 +6,8 @@ use std::path::Path;
 mod task;
 
 fn main() {
-    task::run(read_input());
+    let res = task::run(read_input());
+    println!("Result: {}", res);
 }
 
 fn read_input() -> String {

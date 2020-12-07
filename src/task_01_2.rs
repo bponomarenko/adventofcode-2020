@@ -1,10 +1,10 @@
-pub fn run(input: String) {
+pub fn run(input: String) -> u32 {
     let entries: Vec<u32> = input
         .split_whitespace()
         .map(|s| s.parse().expect("Input should consist of numbers"))
         .collect();
 
-    println!("Result: {}", find_matching_entries(&entries));
+    find_matching_entries(&entries)
 }
 
 fn find_matching_entries(entries: &Vec<u32>) -> u32 {
