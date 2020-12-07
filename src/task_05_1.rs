@@ -1,4 +1,4 @@
-pub fn run(input: &String) {
+pub fn run(input: String) {
     println!("Result: {}", input.split_whitespace().map(|s| parse_id(s)).max().unwrap());
 }
 

@@ -1,4 +1,4 @@
-pub fn run(input: &String) {
+pub fn run(input: String) {
     let lines: Vec<&str> = input.split_terminator('\n').collect();
     let routes = [(1, 1), (3, 1), (5, 1), (7, 1), (1, 2)];
     let mut res = 1;

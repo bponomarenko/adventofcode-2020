@@ -1,4 +1,4 @@
-pub fn run(input: &String) {
+pub fn run(input: String) {
     println!("Valid passports: {}", count_valid_passports(input));
 }
 

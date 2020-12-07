@@ -1,6 +1,6 @@
 use regex::Regex;
 
-pub fn run(input: &String) {
+pub fn run(input: String) {
     let re = Regex::new(r"^(\d+)-(\d+)\s(.):\s(\w+)").unwrap();
 
     let count = input

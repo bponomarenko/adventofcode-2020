@@ -11,7 +11,7 @@ lazy_static! {
     static ref PID_RE: Regex = Regex::new(r"^\d{9}$").unwrap();
 }
 
-pub fn run(input: &String) {
+pub fn run(input: String) {
     println!("Valid passports: {}", count_valid_passports(input));
 }
 

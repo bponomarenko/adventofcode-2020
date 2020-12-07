@@ -19,7 +19,7 @@
     "scope": "rust",
     "prefix": "task",
     "body": [
-      "pub fn run(input: &String) {",
+      "pub fn run(input: String) {",
       "\tprintln!(\"Result: {}\", input);$1",
       "}\n",
       "#[cfg(test)]",

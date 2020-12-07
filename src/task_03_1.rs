@@ -1,4 +1,4 @@
-pub fn run(input: &String) {
+pub fn run(input: String) {
     let lines: Vec<&str> = input.split_terminator('\n').collect();
     println!("Result: {}", find_trees(3, 1, &lines));
 }

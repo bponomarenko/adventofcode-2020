@@ -1,4 +1,4 @@
-pub fn run(input: &String) {
+pub fn run(input: String) {
     let entries: Vec<u32> = input
         .split_whitespace()
         .map(|s| s.parse().expect("Input should consist of numbers"))
