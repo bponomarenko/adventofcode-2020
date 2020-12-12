@@ -2,7 +2,7 @@ use std::env;
 use std::fs;
 use std::path::Path;
 
-#[path = "task_10_2.rs"]
+#[path = "task_12_2.rs"]
 mod task;
 
 fn main() {
