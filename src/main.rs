@@ -3,7 +3,7 @@ use std::fs;
 use std::path::Path;
 use std::time::Instant;
 
-#[path = "task_17_2.rs"]
+#[path = "task_18_2.rs"]
 mod task;
 
 fn main() {
