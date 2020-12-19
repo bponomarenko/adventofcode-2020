@@ -44,10 +44,8 @@ fn assemble_regex_str(rules: &Rules, rule_id: &u8) -> String {
         Some(Rule::Combo(combos)) => {
             if *rule_id == 11 {
                 // Special case for rule #11 with only one combo
-                let combo = combos.get(0).unwrap();
-                let a = combo.get(0).unwrap();
-                let b = combo.get(1).unwrap();
-
+                let a = &combos[0][0];
+                let b = &combos[0][1];
                 return format!(
                     "{0}({0}({0}({0}{1})?{1})?{1})?{1}",
                     assemble_regex_str(rules, a),
