@@ -1,14 +1,10 @@
-use std::collections::HashSet;
+use std::collections::{HashSet, VecDeque};
 
-fn deserialize_card_hand(cards: &str) -> Vec<u8> {
-    cards
-        .split_terminator("\n")
-        .skip(1)
-        .map(|card| card.parse::<u8>().expect("Card is invalid"))
-        .collect()
+fn deserialize_card_hand(cards: &str) -> VecDeque<u8> {
+    cards.lines().skip(1).map(|card| card.parse::<u8>().expect("Card is invalid")).collect()
 }
 
-fn parse_input(input: &String) -> (Vec<u8>, Vec<u8>) {
+fn parse_input(input: &String) -> (VecDeque<u8>, VecDeque<u8>) {
     let players_cards = input.split_terminator("\n\n").collect::<Vec<&str>>();
     match players_cards.as_slice() {
         [p1_cards, p2_cards, ..] => (deserialize_card_hand(p1_cards), deserialize_card_hand(p2_cards)),
@@ -17,40 +13,46 @@ fn parse_input(input: &String) -> (Vec<u8>, Vec<u8>) {
 }
 
 enum Winner {
-    Player1(Vec<u8>),
-    Player2(Vec<u8>),
+    Player1(VecDeque<u8>),
+    Player2(VecDeque<u8>),
 }
 
-fn cards_to_string(cards: &Vec<u8>) -> String {
+fn cards_to_string(cards: &VecDeque<u8>) -> String {
     cards.iter().map(|card| card.to_string()).collect::<Vec<String>>().join(",")
 }
 
-fn play_game(mut player1: Vec<u8>, mut player2: Vec<u8>) -> Winner {
+fn play_game(mut player1: VecDeque<u8>, mut player2: VecDeque<u8>) -> Winner {
     let mut rounds_history = HashSet::new();
 
     while !player1.is_empty() && !player2.is_empty() {
         let round_setup = format!("{}-{}", cards_to_string(&player1), cards_to_string(&player2));
-        if rounds_history.contains(&round_setup) {
+        if !rounds_history.insert(round_setup) {
             // If such setup have been before – Player1 wins immediately
             return Winner::Player1(player1);
-        } else {
-            rounds_history.insert(round_setup);
         }
 
-        let card1 = player1.remove(0);
-        let card2 = player2.remove(0);
+        let card1 = player1.pop_front().unwrap();
+        let card2 = player2.pop_front().unwrap();
 
         if card1 as usize <= player1.len() && card2 as usize <= player2.len() {
             // Recursive combat!
-            match play_game(player1[..card1 as usize].to_vec(), player2[..card2 as usize].to_vec()) {
+            let mut player1_clone = player1.clone();
+            player1_clone.truncate(card1 as usize);
+
+            let mut player2_clone = player2.clone();
+            player2_clone.truncate(card2 as usize);
+
+            match play_game(player1_clone, player2_clone) {
                 Winner::Player1(_) => player1.extend(&[card1, card2]),
                 Winner::Player2(_) => player2.extend(&[card2, card1]),
             }
         } else {
             if card2 > card1 {
-                player2.extend(&[card2, card1]);
+                player2.push_back(card2);
+                player2.push_back(card1);
             } else {
-                player1.extend(&[card1, card2]);
+                player1.push_back(card1);
+                player1.push_back(card2);
             }
         }
     }
